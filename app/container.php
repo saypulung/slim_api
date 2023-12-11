@@ -12,6 +12,12 @@ return [
     App::class => function (ContainerInterface $container) {
         $app = AppFactory::createFromContainer($container);
 
+        $dbSettings = $container->get('settings')['db'];
+        $capsule = new \Illuminate\Database\Capsule\Manager;
+        $capsule->addConnection($dbSettings, 'default');
+        $capsule->bootEloquent();
+        $capsule->setAsGlobal();
+
         // Register routes
         (require __DIR__ . '/routes.php')($app);
 

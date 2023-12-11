@@ -1,7 +1,8 @@
 <?php
 
 use Slim\App;
+use App\Http\Controllers\HomeAction;
 
 return function (App $app) {
-    $app->get('/', \App\Http\Controllers\HomeAction::class);
+    $app->get('/', HomeAction::class);
 };
