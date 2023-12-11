@@ -42,7 +42,8 @@ $settings = [
         'charset'   => ngetenv('DB_CHARSET', 'utf8'),
         'collation' => ngetenv('DB_COLLATION', 'utf8_unicode_ci'),
         'prefix'    => ngetenv('DB_PREFIX', ''),
-    ]
+    ],
+    'cors_origins'  => ngetenv('CORS_ALLOWED_ORIGINS', 'null'),
 ];
 
 return $settings;

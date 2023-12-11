@@ -21,6 +21,7 @@
         "process-timeout" : 0
     },
     "scripts": {
-        "start-dev": "php -S localhost:5001 -t public public/index.php"
+        "start-dev": "php -S localhost:5001 -t public public/index.php",
+        "init-admin": "php console/init-admin.php"
     }
 }
