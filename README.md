@@ -38,3 +38,4 @@ Optionally, you can setup to your web server by pointing document root into dire
 - [Monolog](https://github.com/Seldaek/monolog)
 - [Firebase JWT](https://github.com/firebase/php-jwt)
 - [PHP DI](https://github.com/PHP-DI/PHP-DI)
+- [Ramsey UUID](https://github.com/ramsey/uuid)

@@ -23,6 +23,8 @@ class User extends Model {
 
     protected $hidden = [
         'password',
+        'id',
+        'token',
     ];
 
     public function role()

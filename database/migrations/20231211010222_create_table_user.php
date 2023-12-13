@@ -18,7 +18,7 @@ final class CreateTableUser extends Migration
             $table->datetime('registered')->nullable();
             $table->datetime('verified')->nullable();
             $table->string('token')->nullable();
-            $table->mediumText('metadata')->nullable();
+            $table->json('metadata')->nullable();
             $table->timestamps();
         });
     }

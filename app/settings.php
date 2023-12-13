@@ -12,13 +12,29 @@ function ngetenv(string $key, string $default)
 
 function createResponseJson(Response $response, $data, $statusCode = 200)
 {
-    if (is_array($data)) {
-        $response->getBody()->write(json_encode($data));
+    try {
+        if ($data == NULL)
+        {
+            $data = [];
+        }
+
+        if (is_array($data)) {
+            $response->getBody()->write(json_encode($data));
+            return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withStatus($statusCode);
+        } else {
+            $response->getBody()->write(json_encode(['message' => 'Content not supported']));
+            return $response->withStatus(500);
+        }
+    } catch (Exception $e)
+    {
+        $response->getBody()->write(json_encode([
+            'message'   => $e->getMessage()
+        ]));
         return $response
             ->withHeader('Content-Type', 'application/json')
-            ->withStatus($statusCode);
-    } else {
-        return $response->getBody()->write($data);
+            ->withStatus(500);
     }
 }
 
@@ -44,6 +60,9 @@ $settings = [
         'prefix'    => ngetenv('DB_PREFIX', ''),
     ],
     'cors_origins'  => ngetenv('CORS_ALLOWED_ORIGINS', 'null'),
+    'jwt_secret'    => ngetenv('JWT_SECRET', ''),
+    'app_name'      => ngetenv('APP_NAME', 'slim_api'),
+    'app_url'       => ngetenv('APP_URL', 'http://localhost:5001'),
 ];
 
 return $settings;
