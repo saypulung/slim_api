@@ -20,7 +20,7 @@ Copy .env.example into .env
 
 Customize your .env based on your database configuration or other
 
-`php vendor/bin/phinx migrate -c config-phinx.php`
+`composer run-script migrate`
 
 `composer run-script init-admin`
 
@@ -32,6 +32,8 @@ Optionally, you can setup to your web server by pointing document root into dire
 
 # Used Packages
 - [Slim Framework](https://github.com/slimphp/Slim)
+- [Nyholm PSR7](https://github.com/Nyholm/psr7)
+- [Nyholm PSR7 Server](https://github.com/Nyholm/psr7-server)
 - [Phinx](https://github.com/cakephp/phinx)
 - [Illuminate Database](https://github.com/illuminate/database)
 - [Vlucas Dotenv](https://github.com/vlucas/phpdotenv)
