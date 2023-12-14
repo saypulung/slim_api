@@ -27,6 +27,10 @@ class User extends Model {
         'token',
     ];
 
+    protected $casts = [
+        'metadata' => 'object'
+    ];
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
