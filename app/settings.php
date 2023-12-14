@@ -63,6 +63,9 @@ $settings = [
     'jwt_secret'    => ngetenv('JWT_SECRET', ''),
     'app_name'      => ngetenv('APP_NAME', 'slim_api'),
     'app_url'       => ngetenv('APP_URL', 'http://localhost:5001'),
+    'app_debug'     => ngetenv('APP_DEBUG', 'false'),
+    'log_level'     => ngetenv('APP_LOG_LEVEL', 'debug'),
+
 ];
 
 return $settings;
