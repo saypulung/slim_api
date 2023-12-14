@@ -5,6 +5,7 @@ use Slim\Routing\RouteCollectorProxy;
 
 // Load middlewares
 use App\Http\Middlewares\RequiredLogin;
+use App\Http\Middlewares\RequiredAdmin;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Controllers\HomeAction;
 
@@ -23,9 +24,8 @@ return function (App $app) {
             ->setName('register')
             ->add(new RegisterRequest($app));
     });
-    $app->group('/users', function (RouteCollectorProxy $group) {
-        $group->get('/me', UserAction::class . ':me')->setName('user.me');
-        $group->get('/profile', UserAction::class . ':getProfile')->setName('user.getProfile');
+    $app->group('/users', function (RouteCollectorProxy $group) use($app) {
+        $group->get('/me', UserAction::class . ':me')->setName('user.me')->add(new RequiredAdmin($app));
         $group->post('/profile', UserAction::class . ':updateProfile')->setName('user.updateProfile');
     })->add(new RequiredLogin($app));
 };

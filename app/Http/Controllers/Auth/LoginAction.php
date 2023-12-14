@@ -24,7 +24,7 @@ class LoginAction
         $credentials = $request->getParsedBody();
         if (isset($credentials['email']) && isset($credentials['password']))
         {
-            $user = User::where('email', $credentials['email'])->first();
+            $user = User::where('email', $credentials['email'])->with('role')->first();
             if ($user && password_verify($credentials['password'], $user->password)) {
 
                 $key = $this->container->get('settings')['jwt_secret'];
