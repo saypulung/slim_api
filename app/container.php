@@ -10,6 +10,8 @@ use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
 use function DI\autowire;
 
+$capsule = null;
+
 return [
     'settings' => function () {
         return require __DIR__ . '/settings.php';
@@ -22,15 +24,17 @@ return [
         return new Logger('app', $handlers, [$container->get(UidProcessor::class)]);
     },
     UidProcessor::class => autowire(),
-    App::class => function (ContainerInterface $container) {
+    App::class => function (ContainerInterface $container) use ($capsule) {
         $app = AppFactory::createFromContainer($container);
 
         $dbSettings = $container->get('settings')['db'];
-        $cors_origins = $container->get('settings')['cors_origins'];
         $capsule = new \Illuminate\Database\Capsule\Manager;
         $capsule->addConnection($dbSettings, 'default');
         $capsule->bootEloquent();
         $capsule->setAsGlobal();
+        $container->set('db', $capsule);
+
+        $cors_origins = $container->get('settings')['cors_origins'];
 
         if (php_sapi_name() !== 'cli') {
 
@@ -55,5 +59,5 @@ return [
         }
 
         return $app;
-    },
+    }
 ];

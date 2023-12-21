@@ -29,6 +29,7 @@
     "scripts": {
         "start-dev": "php -S localhost:5001 -t public public/index.php",
         "init-admin": "php console/init-admin.php",
+        "init-permissions": "php console/init-permissions.php",
         "migrate": "php vendor/bin/phinx migrate -c config-phinx.php",
         "rollback": "php vendor/bin/phinx rollback -c config-phinx.php"
     }
