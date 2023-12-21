@@ -41,7 +41,11 @@ class RequiredPermissionEndpoint implements MiddlewareInterface
             if (!$authUser) {
                 throw new \Exception('Login property not provided');
             }
-            $hasPermission = Role::find(1)->permissions()->where('permissions.name', $route->getName())->exists();
+            $hasPermission = Role::find($authUser->role->id)
+                ->permissions()
+                ->where('permissions.name', $route->getName())
+                ->exists();
+            
             if (!$hasPermission) {
                 throw new \Exception('You do not have permission');
             }

@@ -30,7 +30,9 @@ return function (App $app) {
         $group->get('/me', UserAction::class . ':me')
             ->setName('user.me')
             ->add(new RequiredPermissionEndpoint($app));
-        $group->post('/profile', UserAction::class . ':updateProfile')->setName('user.updateProfile');
+        $group->post('/profile', UserAction::class . ':updateProfile')
+            ->setName('user.updateProfile')
+            ->add(new RequiredPermissionEndpoint($app));
     })->add(new RequiredLogin($app));
 
     // used for example permission implementations
@@ -38,16 +40,16 @@ return function (App $app) {
         $group->get('/', ProjectAction::class)
             ->setName('project.all')
             ->add(new RequiredPermissionEndpoint($app));
-        $group->get('/detail/:id', ProjectAction::class)
+        $group->get('/detail/{id}', ProjectAction::class)
             ->setName('project.detail')
             ->add(new RequiredPermissionEndpoint($app));
         $group->post('/', ProjectAction::class)
             ->setName('project.create')
             ->add(new RequiredPermissionEndpoint($app));
-        $group->put('/:id', ProjectAction::class)
+        $group->put('/{id}', ProjectAction::class)
             ->setName('project.update')
             ->add(new RequiredPermissionEndpoint($app));
-        $group->delete('/:id', ProjectAction::class)
+        $group->delete('/{id}', ProjectAction::class)
             ->setName('project.delete')
             ->add(new RequiredPermissionEndpoint($app));
     })->add(new RequiredLogin($app));
