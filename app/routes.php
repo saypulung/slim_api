@@ -8,6 +8,7 @@ use App\Http\Middlewares\RequiredLogin;
 use App\Http\Middlewares\RequiredAdmin;
 use App\Http\Middlewares\RequiredPermissionEndpoint;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Http\Controllers\HomeAction;
 use App\Http\Controllers\ProjectAction;
 
@@ -30,8 +31,9 @@ return function (App $app) {
         $group->get('/me', UserAction::class . ':me')
             ->setName('user.me')
             ->add(new RequiredPermissionEndpoint($app));
-        $group->post('/profile', UserAction::class . ':updateProfile')
+        $group->put('/profile', UserAction::class . ':updateProfile')
             ->setName('user.updateProfile')
+            ->add(new ProfileRequest($app))
             ->add(new RequiredPermissionEndpoint($app));
     })->add(new RequiredLogin($app));
 

@@ -10,7 +10,7 @@ use Psr\Http\Server\RequestHandlerInterface as Handler;
 use Slim\App;
 use Rakit\Validation\Validator;
 
-class RegisterRequest implements MiddlewareInterface, CustomRequest
+class ProfileRequest implements MiddlewareInterface, CustomRequest
 {
     private $app;
     private $errors = [];
@@ -50,8 +50,6 @@ class RegisterRequest implements MiddlewareInterface, CustomRequest
         $validation = $validator->validate($payload, [
             'first_name'            => 'required|min:3|max:50',
             'last_name'             => 'min:3|max:50',
-            'email'                 => 'required|email|max:50',
-            'password'              => 'required|min:6',
             'metadata'              => 'array',
         ]);
         if ($validation->fails()) {

@@ -23,4 +23,18 @@ class UserAction
     {
         return createResponseJson($response, $request->getAttribute('authUser')->toArray());
     }
+    
+    public function updateProfile(Request $request, Response $response): Response
+    {
+        $payload = $request->getParsedBody();
+        $authUser = $request->getAttribute('authUser');
+        $authUser->first_name = $payload['first_name'];
+        $authUser->last_name = $payload['last_name'];
+        $authUser->metadata = $payload['metadata'];
+        if ($authUser->save()) {
+            return createResponseJson($response, ['message' => 'Update profile success']);
+        } else {
+            return createResponseJson($response, ['message' => 'Update profile failed'], 500);
+        }
+    }
 }

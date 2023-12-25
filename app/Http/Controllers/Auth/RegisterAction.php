@@ -30,7 +30,7 @@ class RegisterAction
         try {
             $user = User::create([
                 'first_name'    => $payload['first_name'],
-                'last_name'     => $payload['last_name'],
+                'last_name'     => $payload['last_name'] ?? '',
                 'email'         => $email,
                 'password'      => password_hash($payload['password'], PASSWORD_BCRYPT, ['cost' => 10]),
                 'metadata'      => $payload['metadata'],
