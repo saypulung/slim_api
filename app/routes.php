@@ -35,6 +35,8 @@ return function (App $app) {
             ->setName('user.updateProfile')
             ->add(new ProfileRequest($app))
             ->add(new RequiredPermissionEndpoint($app));
+        $group->put('/password', UserAction::class . ':changePassword')
+            ->setName('user.changePassword');
     })->add(new RequiredLogin($app));
 
     // used for example permission implementations
