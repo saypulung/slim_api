@@ -33,6 +33,12 @@ Access your API by URL [localhost:5001](http://localhost:5001)
 
 Optionally, you can setup to your web server by pointing document root into directory `public`
 
+# Using Postman
+- Import Slim API Postman collection in this root of project
+- Create your environment
+- Test using login or register, then the other API will inherit JWT token
+- Default user and password from `init admin`, username : `admin` password : `admin1234!`
+
 # Thanks to Developer of These Installed Packages
 - [Slim Framework](https://github.com/slimphp/Slim)
 - [Nyholm PSR7](https://github.com/Nyholm/psr7)
